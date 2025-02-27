@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ban Appeal - Somewhere in Miami</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #36393f;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 500px;
+            margin: 50px auto;
+            background: #2f3136;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #40444b;
+            color: white;
+        }
+        button {
+            background-color: #5865F2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4752C4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Ban Appeal Form</h2>
+        <p>If you were banned from "Somewhere in Miami," you can appeal your ban here.</p>
+        <form action="#" method="POST">
+            <label for="username">Discord Username (include #1234):</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="banReason">Reason for Ban:</label>
+            <textarea id="banReason" name="banReason" rows="3" required></textarea>
+
+            <label for="appealReason">Why should you be unbanned?</label>
+            <textarea id="appealReason" name="appealReason" rows="5" required></textarea>
+
+            <button type="submit">Submit Appeal</button>
+        </form>
+    </div>
+
+</body>
+</html>
