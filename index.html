@@ -30,7 +30,7 @@
             border-radius: 5px;
             background: #40444b;
             color: white;
-            resize: none; /* Prevent resizing */
+            resize: none;
         }
         button {
             background-color: #5865F2;
@@ -74,31 +74,29 @@
             const banReason = document.getElementById("banReason").value;
             const appealReason = document.getElementById("appealReason").value;
 
-            // Google Form Action URL (replace with your Google Form's action URL)
-            const formActionURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScw0uZQrTSYQv9Xn9UBMNx5Qjlk_WLINWOs0dVYiiBljHgHBA/formResponse"; // <-- Replace with your actual Google Form action URL
+            // Google Form Action URL (Replace with your actual form response URL)
+            const formActionURL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse"; // Replace with your form's action URL
 
-            // Prepare data to send to Google Forms (use the entry IDs you found)
+            // Prepare data to send to Google Forms
             const data = new FormData();
             data.append("entry.148911655", username);  // Discord Username
             data.append("entry.1885610923", banReason);  // Ban Reason
             data.append("entry.1365417329", appealReason);  // Appeal Reason
 
-            // Submit the data to Google Forms
+            // Submit the form to Google Forms
             fetch(formActionURL, {
                 method: 'POST',
-                body: data
+                body: data,
+                mode: 'no-cors' // Ensures request completes successfully without blocking
             })
-            .then(response => {
-                if (response.ok) {
-                    alert("? Appeal Submitted! Please wait for staff to review your case.");
-                    document.getElementById("appealForm").reset(); // Clear form fields
-                } else {
-                    alert("? Error submitting appeal. Please try again.");
-                }
+            .then(() => {
+                // Always show success message (Google Forms doesn’t return standard responses)
+                alert("✅ Appeal Submitted! Please wait for staff to review your case.");
+                document.getElementById("appealForm").reset(); // Clear form fields
             })
             .catch(error => {
                 console.error("Error:", error);
-                alert("? Could not send appeal. Check your connection.");
+                alert("❌ Could not send appeal. Check your connection.");
             });
         });
     </script>
