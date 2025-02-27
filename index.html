@@ -30,7 +30,7 @@
             border-radius: 5px;
             background: #40444b;
             color: white;
-            resize: none; /* Prevents resizing */
+            resize: none; /* Prevent resizing */
         }
         button {
             background-color: #5865F2;
@@ -51,8 +51,8 @@
     <div class="container">
         <h2>Ban Appeal Form</h2>
         <p>If you were banned from "Somewhere in Miami," you can appeal your ban here.</p>
-        <form action="#" method="POST">
-            <label for="username">Discord Username (include #1234):</label>
+        <form id="appealForm">
+            <label for="username">Discord Username:</label>
             <input type="text" id="username" name="username" required>
 
             <label for="banReason">Reason for Ban:</label>
@@ -64,6 +64,44 @@
             <button type="submit">Submit Appeal</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById("appealForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents form from refreshing the page
+
+            // Webhook URL (replace with your own)
+            const webhookURL = "https://discord.com/api/webhooks/1341832460710838423/geqYjbBBDyEXzFyOdqJBtvCwjneMi9tUuNGTYOOoGwpLvw5vSdkJwVUX4gpB4wU2K5PV"; 
+
+            // Get form values
+            const username = document.getElementById("username").value;
+            const banReason = document.getElementById("banReason").value;
+            const appealReason = document.getElementById("appealReason").value;
+
+            // Create message payload
+            const data = {
+                "content": `📢 **New Ban Appeal Submitted**\n👤 **User:** ${username}\n🚫 **Ban Reason:** ${banReason}\n📝 **Appeal Reason:** ${appealReason}`
+            };
+
+            // Send to Discord Webhook
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("✅ Appeal Submitted! Please wait for staff to review your case.");
+                    document.getElementById("appealForm").reset(); // Clear form fields
+                } else {
+                    alert("❌ Error submitting appeal. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("❌ Could not send appeal. Check your connection.");
+            });
+        });
+    </script>
 
 </body>
 </html>
